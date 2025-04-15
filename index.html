@@ -27,10 +27,10 @@
 	<script src="https://unpkg.com/@ungap/custom-elements-builtin"></script>
 	<script src="x-frame-bypass.js" type="module"></script>
 	<script src="loader.js" type="module"></script>
-	<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" defer></script>
+	<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"></script>
 </head>
 <body>
 	<iframe is="x-frame-bypass" src="https://mailmeteor.com/email-checker?email=fake.email%40domain.com"></iframe>
-	<div class="cf-turnstile" data-sitekey="YourPublicKey"></div>
+	<div id="cloudflare-captcha"></div>
 </body>
 </html>
