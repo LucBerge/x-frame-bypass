@@ -42,8 +42,12 @@ function spoof(object, attr, value) {
     const valueBefore = object[attr];
 
     Object.defineProperty(object, attr, {
+        configurable: true,
         get: function () {
             return value;
+        },
+        set: function (newValue) {
+            console.log(`Attempt to set ${attr} to ${newValue}`);
         }
     });
     
