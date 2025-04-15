@@ -6,12 +6,14 @@ async function load() {
     console.log("Loading...");
     const captchaToken = await this.captcha();
 
+    console.log("Captcha token: " + captchaToken);
+
     // Call the API
     const response = await fetch(`https://tools.mailmeteor.com/api/email-checker?cf-turnstile-response=${captchaToken}`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({
-                  email: this.email,
+                  email: "fake.email@domain.com",
                 }),
     });
       
