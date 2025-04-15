@@ -39,20 +39,24 @@ async function load() {
 }
 
 function spoof(object, attr, value) {
-    const valueBefore = object[attr];
+    try {
+        const valueBefore = object[attr];
 
-    Object.defineProperty(object, attr, {
-        configurable: true,
-        get: function () {
-            return value;
-        },
-        set: function (newValue) {
-            console.log(`Attempt to set ${attr} to ${newValue}`);
-        }
-    });
-    
-    const valueAfter = object[attr];
-    console.log(`Spoofed  ${attr} from ${valueBefore} to ${valueAfter}`);
+        Object.defineProperty(object, attr, {
+            configurable: true,
+            get: function () {
+                return value;
+            },
+            set: function (newValue) {
+                console.log(`Attempt to set ${attr} to ${newValue}`);
+            }
+        });
+        
+        const valueAfter = object[attr];
+        console.log(`Spoofed ${attr} from ${valueBefore} to ${valueAfter}`);
+    } catch (e) {
+        console.error(`Failed to spoof ${attr}: ${e}`);
+    }
 }
 
 function captcha() {
