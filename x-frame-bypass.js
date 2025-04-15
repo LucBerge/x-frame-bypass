@@ -6,6 +6,7 @@ customElements.define('x-frame-bypass', class extends HTMLIFrameElement {
 		super()
 	}
 	attributeChangedCallback () {
+		console.log(`src is: ${this.src}`)
 		this.load(this.src)
 	}
 	connectedCallback () {
@@ -73,6 +74,7 @@ customElements.define('x-frame-bypass', class extends HTMLIFrameElement {
 			'https://yacdn.org/proxy/',
 			'https://api.codetabs.com/v1/proxy/?quest='
 		]
+		console.log(`Fetching proxy ${i + 1} of ${proxies.length}: ${proxies[i] + url}`)
 		return fetch(proxies[i] + url, options).then(res => {
 			if (!res.ok)
 				throw new Error(`${res.status} ${res.statusText}`);
