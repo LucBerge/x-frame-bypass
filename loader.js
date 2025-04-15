@@ -3,9 +3,13 @@ window.onload = function() {
 };
 
 async function load() {
-    console.log("Loading...");
-    const captchaToken = await captcha();
+    // Spoof the domain
+    console.log("Spoofing domain...");
+    spoofDomain("https://mailmeteor.com/email-checker");
 
+    // Load the captcha
+    console.log("Loading captcha...");
+    const captchaToken = await captcha();
     console.log("Captcha token: " + captchaToken);
 
     // Call the API
@@ -26,6 +30,18 @@ async function load() {
     else {
         console.log("ERROR: " + response.statusText);
     }
+}
+
+function spoofDomain(url) {
+    console.log(window.location.origin);
+
+    Object.defineProperty(window.location, 'origin', {
+        get: function () {
+            return url;
+        }
+    });
+    
+    console.log(window.location.origin);
 }
 
 function captcha() {
