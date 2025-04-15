@@ -4,7 +4,7 @@ window.onload = function() {
 
 async function load() {
     console.log("Loading...");
-    const captchaToken = await this.captcha();
+    const captchaToken = await captcha();
 
     console.log("Captcha token: " + captchaToken);
 
