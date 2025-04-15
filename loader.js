@@ -5,7 +5,13 @@ window.onload = function() {
 async function load() {
     // Spoof the domain
     console.log("Spoofing domain...");
-    spoofDomain("https://mailmeteor.com/email-checker");
+    spoof(window, 'origin', 'https://mailmeteor.com');
+    spoof(window.location, 'host', 'mailmeteor.com');
+    spoof(window.location, 'hostname', 'mailmeteor.com');
+    spoof(window.location, 'href', "https://mailmeteor.com/email-checker?email=fake.email%40domain.com");
+    spoof(window.location, 'origin', "https://mailmeteor.com");
+    spoof(window.location, 'pathname', "/email-checker");
+    spoof(window.location, 'search', "fake.email%40domain.com");
 
     // Load the captcha
     console.log("Loading captcha...");
@@ -32,16 +38,17 @@ async function load() {
     }
 }
 
-function spoofDomain(url) {
-    console.log(window.location.origin);
+function spoof(object, attr, value) {
+    const valueBefore = object[attr];
 
-    Object.defineProperty(window.location, 'origin', {
+    Object.defineProperty(object, attr, {
         get: function () {
-            return url;
+            return value;
         }
     });
     
-    console.log(window.location.origin);
+    const valueAfter = object[attr];
+    console.log(`Spoofed  ${attr} from ${valueBefore} to ${valueAfter}`);
 }
 
 function captcha() {
